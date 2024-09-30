@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
           );
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.blue, // Цвет кнопки
+        backgroundColor: const Color.fromARGB(255, 44, 228, 75), // Цвет кнопки
       ),
     );
   }

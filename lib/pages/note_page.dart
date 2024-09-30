@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:pcs_4/model/note.dart'; 
 
-class NotePage extends StatelessWidget {
+class NotePage extends StatefulWidget {
   final Note note; 
 
   const NotePage({super.key, required this.note}); 
 
   @override
+  _NotePageState createState() => _NotePageState();
+}
+
+class _NotePageState extends State<NotePage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(note.title), 
+        title: Text(widget.note.title), 
       ),
-      body: SingleChildScrollView(  // Оборачиваем в SingleChildScrollView
+      body: SingleChildScrollView(  
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,44 +25,81 @@ class NotePage extends StatelessWidget {
             SizedBox(height: 16),
             Center(
               child: Text(
-                note.title, 
+                widget.note.title, 
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: 16),
             Center(
-              child: Image.asset(note.imageUrl, width: 340, height: 260),
+              child: Image.asset(widget.note.imageUrl, width: 340, height: 260),
             ),
             SizedBox(height: 16),
             Text(
-              'Дата релиза: ${note.releaseDate}',
+              'Дата релиза: ${widget.note.releaseDate}',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 8),
             Text(
-              'Производитель: ${note.developer}',
+              'Производитель: ${widget.note.developer}',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 8),
             Text(
-              'Жанр: ${note.genre}',
+              'Жанр: ${widget.note.genre}',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 8),
             Text(
-              'Цена: ${note.price}P',
+              'Цена: ${widget.note.price}P',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 8),
             Text(
-              'Информация по игре: ${note.textMain}',
+              'Информация по игре: ${widget.note.textMain}',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             SizedBox(height: 8),
             // Text(note.textNote, style: TextStyle(fontSize: 16),米可-06),
+            SizedBox(height: 16), 
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  _deleteNote(context);
+                },
+                style: ElevatedButton.styleFrom(foregroundColor: Colors.white, backgroundColor: Colors.red),
+                child: Text('Удалить'),
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  void _deleteNote(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Удалить заметку?'),
+          content: Text('Вы уверены, что хотите удалить эту заметку?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); 
+              },
+              child: Text('Отмена'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); 
+                Navigator.of(context).pop(); 
+                },
+              child: Text('Удалить'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
