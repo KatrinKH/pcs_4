@@ -23,8 +23,9 @@ class Note {
 
   @override
   String toString() {
-    return 'Note{id: $id, title: $title, price: $price}';
-  }
+    return 'Note{id: $id, title: $title, textNote: $textNote, textMain: $textMain, imageUrl: $imageUrl, price: $price, genre: $genre, developer: $developer, releaseDate: $releaseDate}';
+    }
+
 }
 
 final List<Note> notes = [
