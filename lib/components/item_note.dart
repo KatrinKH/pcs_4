@@ -45,7 +45,7 @@ class ItemNote extends StatelessWidget {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Удалить игру?'),
-                            content: Text('Вы уверены, что хотите удалить эту игру'),
+                            content: Text('Вы уверены, что хотите удалить эту игру?'),
                             actions: [
                               TextButton(child: Text('Отмена'), onPressed: () => Navigator.of(context).pop()),
                               TextButton(child: Text('Удалить'), onPressed: () { onDelete(note); Navigator.of(context).pop(); }),
