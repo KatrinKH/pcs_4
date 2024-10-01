@@ -60,46 +60,9 @@ class _NotePageState extends State<NotePage> {
             ),
             SizedBox(height: 8),
             // Text(note.textNote, style: TextStyle(fontSize: 16),米可-06),
-            SizedBox(height: 16), 
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  _deleteNote(context);
-                },
-                style: ElevatedButton.styleFrom(foregroundColor: Colors.white, backgroundColor: Colors.red),
-                child: Text('Удалить'),
-              ),
-            ),
           ],
         ),
       ),
-    );
-  }
-
-  void _deleteNote(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Удалить заметку?'),
-          content: Text('Вы уверены, что хотите удалить эту заметку?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); 
-              },
-              child: Text('Отмена'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); 
-                Navigator.of(context).pop(); 
-                },
-              child: Text('Удалить'),
-            ),
-          ],
-        );
-      },
     );
   }
 }
