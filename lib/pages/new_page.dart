@@ -143,17 +143,14 @@ class _NewPageState extends State<NewPage> {
                       releaseDate: _releaseDateController.text,
                     );
 
-                    // Добавляем новую заметку в список
                     setState(() {
                       notes.add(newNote);
                     });
 
-                    // Показываем сообщение о сохранении
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Заметка сохранена')),
                     );
 
-                    // Очищаем поля ввода
                     _idController.clear();
                     _titleController.clear();
                     _textNoteController.clear();
