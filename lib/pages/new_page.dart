@@ -26,7 +26,7 @@ class _NewPageState extends State<NewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Новая заметка'),
+        title: Text('Новая игра'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
