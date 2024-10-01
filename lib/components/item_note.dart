@@ -3,9 +3,10 @@ import 'package:pcs_4/model/note.dart';
 import 'package:pcs_4/pages/note_page.dart';
 
 class ItemNote extends StatelessWidget {
-  const ItemNote({super.key, required this.note});
+  const ItemNote({super.key, required this.note, required this.onDelete});
   
   final Note note; 
+  final Function(Note) onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,39 @@ class ItemNote extends StatelessWidget {
                 Text('- Цена: ${note.price} рублей', style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 16),),
                 SizedBox(height: 4), 
                 Text('${note.textNote}',style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 16),),
-                //TextButton(onPressed: () {}, child: Text( 'Полный текст заметки', style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 12)米可-06,),),
+                SizedBox(height: 8),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Удалить игру?'),
+                            content: Text('Вы уверены, что хотите удалить эту игру'),
+                            actions: [
+                              TextButton(
+                                child: Text('Отмена'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text('Удалить'),
+                                onPressed: () {
+                                  onDelete(note);
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
