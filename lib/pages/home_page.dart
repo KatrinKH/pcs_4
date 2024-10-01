@@ -23,9 +23,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Видеоигры'),
+        title: const Center(child: Text('Видеоигры')),
       ),
-      backgroundColor: const Color.fromARGB(255, 103, 190, 234),
+      backgroundColor: const Color(0xFF67BEEA), 
       body: ListView.builder(
         itemCount: _notes.length, 
         itemBuilder: (BuildContext context, int index) {
@@ -33,14 +33,12 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const NewPage()), 
-          );
-        },
-        child: Icon(Icons.add),
-        backgroundColor: const Color.fromARGB(255, 44, 228, 75), 
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const NewPage()), 
+        ),
+        child: const Icon(Icons.add),
+        backgroundColor: const Color(0xFF2CE44B), 
       ),
     );
   }

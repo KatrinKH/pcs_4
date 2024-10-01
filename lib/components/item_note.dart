@@ -13,13 +13,10 @@ class ItemNote extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () =>
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NotePage(note: note), 
-              ),
-            ),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NotePage(note: note)),
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 255, 255, 255), 
@@ -32,11 +29,11 @@ class ItemNote extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start, 
               children: [
-                Expanded( child: Center(child: Image.asset(note.imageUrl, fit: BoxFit.cover),),),
+                Expanded(child: Center(child: Image.asset(note.imageUrl, fit: BoxFit.cover))),
                 SizedBox(height: 8), 
-                Text('- Цена: ${note.price} рублей', style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 16),),
+                Text('- Цена: ${note.price} рублей', style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 16)),
                 SizedBox(height: 4), 
-                Text('${note.textNote}',style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 16),),
+                Text('${note.textNote}', style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 16)),
                 SizedBox(height: 8),
                 Align(
                   alignment: Alignment.centerRight,
@@ -50,19 +47,8 @@ class ItemNote extends StatelessWidget {
                             title: Text('Удалить игру?'),
                             content: Text('Вы уверены, что хотите удалить эту игру'),
                             actions: [
-                              TextButton(
-                                child: Text('Отмена'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text('Удалить'),
-                                onPressed: () {
-                                  onDelete(note);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
+                              TextButton(child: Text('Отмена'), onPressed: () => Navigator.of(context).pop()),
+                              TextButton(child: Text('Удалить'), onPressed: () { onDelete(note); Navigator.of(context).pop(); }),
                             ],
                           );
                         },
