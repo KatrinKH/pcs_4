@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pcs_4/components/item_note.dart';
 import 'package:pcs_4/model/note.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -19,6 +18,101 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void addNote(Note newNote) {
+    setState(() {
+      _notes.add(newNote);
+    });
+  }
+
+  void _showAddNoteDialog(BuildContext context) {
+    TextEditingController titleController = TextEditingController();
+    TextEditingController textNoteController = TextEditingController();
+    TextEditingController textMainController = TextEditingController();
+    TextEditingController imageUrlController = TextEditingController();
+    TextEditingController priceController = TextEditingController();
+    TextEditingController genreController = TextEditingController();
+    TextEditingController developerController = TextEditingController();
+    TextEditingController releaseDateController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Добавить новую игру'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(labelText: 'Название'),
+                ),
+                TextField(
+                  controller: textNoteController,
+                  decoration: const InputDecoration(labelText: 'Краткое описание'),
+                ),
+                TextField(
+                  controller: textMainController,
+                  decoration: const InputDecoration(labelText: 'Основная информация об игре'),
+                ),
+                TextField(
+                  controller: imageUrlController,
+                  decoration: const InputDecoration(labelText: 'URL изображения'),
+                ),
+                TextField(
+                  controller: priceController,
+                  decoration: const InputDecoration(labelText: 'Цена'),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: genreController,
+                  decoration: const InputDecoration(labelText: 'Жанр игры'),
+                ),
+                TextField(
+                  controller: developerController,
+                  decoration: const InputDecoration(labelText: 'Разработчик'),
+                ),
+                TextField(
+                  controller: releaseDateController,
+                  decoration: const InputDecoration(labelText: 'Дата выпуска'),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text('Отмена'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('Добавить'),
+              onPressed: () {
+                int newId = _notes.isEmpty ? 1 : _notes.last.id + 1;
+                String imageUrl = imageUrlController.text.trim();
+                if (imageUrl.isEmpty) {
+                  imageUrl = 'assets/images/default.jpg'; // Путь к изображению по умолчанию
+                }
+                double price = double.tryParse(priceController.text) ?? 0.0;
+                Note newNote = Note(
+                  id: newId,
+                  title: titleController.text,
+                  textNote: textNoteController.text,
+                  textMain: textMainController.text,
+                  imageUrl: imageUrl,
+                  price: price,
+                  genre: genreController.text,
+                  developer: developerController.text,
+                  releaseDate: releaseDateController.text,
+                );
+                addNote(newNote);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +126,12 @@ class _HomePageState extends State<HomePage> {
           return ItemNote(note: _notes[index], onDelete: deleteNote); 
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showAddNoteDialog(context),
+        backgroundColor: const Color.fromARGB(255, 88, 255, 94),
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
