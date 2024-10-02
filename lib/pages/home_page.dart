@@ -86,22 +86,45 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               child: const Text('Добавить'),
               onPressed: () {
-                int newId = _notes.isEmpty ? 1 : _notes.last.id + 1;
+                String title = titleController.text.trim();
+                String textNote = textNoteController.text.trim();
+                String textMain = textMainController.text.trim();
                 String imageUrl = imageUrlController.text.trim();
-                if (imageUrl.isEmpty) {
-                  imageUrl = 'assets/images/default.jpg'; // Путь к изображению по умолчанию
+                String genre = genreController.text.trim();
+                String developer = developerController.text.trim();
+                String releaseDate = releaseDateController.text.trim();
+
+                if (title.isEmpty || textNote.isEmpty || textMain.isEmpty || genre.isEmpty || developer.isEmpty || releaseDate.isEmpty) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Ошибка'),
+                        content: const Text('Пожалуйста, заполните все обязательные поля.'),
+                        actions: [
+                          TextButton(
+                            child: const Text('OK'),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  return;
                 }
+
+                int newId = _notes.isEmpty ? 1 : _notes.last.id + 1;
                 double price = double.tryParse(priceController.text) ?? 0.0;
                 Note newNote = Note(
                   id: newId,
-                  title: titleController.text,
-                  textNote: textNoteController.text,
-                  textMain: textMainController.text,
+                  title: title,
+                  textNote: textNote,
+                  textMain: textMain,
                   imageUrl: imageUrl,
                   price: price,
-                  genre: genreController.text,
-                  developer: developerController.text,
-                  releaseDate: releaseDateController.text,
+                  genre: genre,
+                  developer: developer,
+                  releaseDate: releaseDate,
                 );
                 addNote(newNote);
                 Navigator.of(context).pop();
