@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pcs_4/components/item_note.dart';
 import 'package:pcs_4/model/note.dart';
-import 'package:pcs_4/pages/new_page.dart'; 
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,14 +31,6 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (BuildContext context, int index) {
           return ItemNote(note: _notes[index], onDelete: deleteNote); 
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const NewPage()), 
-        ),
-        child: const Icon(Icons.add),
-        backgroundColor: const Color(0xFF2CE44B), 
       ),
     );
   }
